@@ -21,6 +21,12 @@
     <ClCompile Include="run.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="icmp.hpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="icmp.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers.hpp">

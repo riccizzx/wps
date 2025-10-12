@@ -1,24 +1,52 @@
 #include "headers.hpp"
 
-void WindowsPortScanner::Scanner::ListeningPorts(){
-    PMIB_TCPTABLE_OWNER_PID pTcpTable;
-    DWORD dwSize = 0;
-    DWORD dwRetVal = 0;
-
-    // Allocate initial buffer
-    pTcpTable = (MIB_TCPTABLE_OWNER_PID*)malloc(sizeof(MIB_TCPTABLE_OWNER_PID));
-    dwSize = sizeof(MIB_TCPTABLE_OWNER_PID);
-
-    // Get required buffer size
-    if ((dwRetVal = GetExtendedTcpTable(pTcpTable, &dwSize, TRUE, AF_INET, TCP_TABLE_OWNER_PID_ALL, 0)) == ERROR_INSUFFICIENT_BUFFER) {
-        free(pTcpTable);
-        pTcpTable = (MIB_TCPTABLE_OWNER_PID*)malloc(dwSize);
+void wps::scanner::ports()
+{
+    
+    c.pTcpTable = (MIB_TCPTABLE_OWNER_PID*)malloc(sizeof(MIB_TCPTABLE_OWNER_PID));
+    c.dwSize = sizeof(MIB_TCPTABLE_OWNER_PID);
+    
+    // get required buffer size
+    if ((c.dwRetVal = GetExtendedTcpTable(c.pTcpTable, &c.dwSize, TRUE, AF_INET,
+        TCP_TABLE_OWNER_PID_ALL, 0)) == ERROR_INSUFFICIENT_BUFFER) // get all tcp table 
+    {
+    
+        free(c.pTcpTable); 
+        c.pTcpTable = (MIB_TCPTABLE_OWNER_PID*)malloc(c.dwSize);
+    
     }
 
-    // Retrieve TCP table
-    if ((dwRetVal = GetExtendedTcpTable(pTcpTable, &dwSize, TRUE, AF_INET, TCP_TABLE_OWNER_PID_ALL, 0)) == NO_ERROR) {
-        for (DWORD i = 0; i < pTcpTable->dwNumEntries; i++) {
-            MIB_TCPROW_OWNER_PID row = pTcpTable->table[i];
+    if (c.pTcpTable){
+        free(c.pTcpTable);
+    }
+    
+    std::cout << c.pTcpTable;
+}
+
+void wps::scanner::listeningports()
+{
+
+    // allocate initial buffer
+    c.pTcpTable = (MIB_TCPTABLE_OWNER_PID*)malloc(sizeof(MIB_TCPTABLE_OWNER_PID));
+    c.dwSize = sizeof(MIB_TCPTABLE_OWNER_PID);
+
+    // get required buffer size
+    if ((c.dwRetVal = GetExtendedTcpTable(c.pTcpTable, &c.dwSize, TRUE, AF_INET,
+        TCP_TABLE_OWNER_PID_ALL, 0)) == ERROR_INSUFFICIENT_BUFFER)
+    {
+
+        free(c.pTcpTable);
+        c.pTcpTable = (MIB_TCPTABLE_OWNER_PID*)malloc(c.dwSize);
+
+    }
+
+    // retrieve TCP table
+    if ((c.dwRetVal = GetExtendedTcpTable(c.pTcpTable, &c.dwSize, TRUE, AF_INET,
+        TCP_TABLE_OWNER_PID_ALL, 0)) == NO_ERROR)
+    {
+
+        for (DWORD i = 0; i < c.pTcpTable->dwNumEntries; i++) {
+            MIB_TCPROW_OWNER_PID row = c.pTcpTable->table[i];
 
             if (row.dwState == MIB_TCP_STATE_LISTEN) {
                 // Convert IP address using InetNtop
@@ -27,7 +55,7 @@ void WindowsPortScanner::Scanner::ListeningPorts(){
 
                 char ipStr[INET_ADDRSTRLEN] = { 0 };
                 if (InetNtopA(AF_INET, &ipAddr, ipStr, INET_ADDRSTRLEN) == NULL) {
-                    std::cerr << "Failed to convert IP address\n";
+                    handle_error("Failed to convert IP address\n");
                     continue;
                 }
 
@@ -40,19 +68,21 @@ void WindowsPortScanner::Scanner::ListeningPorts(){
         }
     }
     else {
-        std::cerr << "GetExtendedTcpTable failed with code: " << dwRetVal << std::endl;
+        handle_error("GetExtendedTcpTable failed with code: ", c.dwRetVal);
     }
 
-    if (pTcpTable) {
-        free(pTcpTable);
+    if (c.pTcpTable) {
+        free(c.pTcpTable);
     }
 }
 
-void WindowsPortScanner::Scanner::Run() {
+void wps::scanner::run() {
     if (WSAStartup(MAKEWORD(2, 2), &wsadata) != 0) {
-        std::cerr << "WSAStartup failed with error: " << WSAGetLastError() << std::endl;
-        return;
+        handle_error("WSAStartup failed: ", WSAGetLastError());
+        exit(EXIT_FAILURE);
     }
-    ListeningPorts();
+
+    //ports();
+    listeningports();
     WSACleanup();
 }

@@ -2,11 +2,13 @@
 
 int main() {
 	try {
-		WindowsPortScanner::Scanner scanner;
-		scanner.Run();
+		wps::scanner scanner;
+		scanner.run();
 	}
 	catch (const std::exception& e) {
-		std::cerr << "An error occurred: " << e.what() << std::endl;
+		handle_error("error ", e.what());
 		return EXIT_FAILURE;
 	}
+
+	return 0;
 }
