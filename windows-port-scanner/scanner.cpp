@@ -16,11 +16,6 @@ void wps::scanner::ports()
     
     }
 
-    if (c.pTcpTable){
-        free(c.pTcpTable);
-    }
-    
-    std::cout << c.pTcpTable;
 }
 
 void wps::scanner::listeningports()

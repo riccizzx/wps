@@ -2,7 +2,6 @@
 // this code uses the Windows API to retrieve and display all listening ports on the system.
 // more implementation soon.
 
-#pragma once
 #ifndef WINDOWS_PORT_SCANNER_HEADERS_HPP
 #define WINDOWS_PORT_SCANNER_HEADERS_HPP
 
@@ -11,6 +10,8 @@
 #include <iphlpapi.h>
 #include <iostream>
 #include <vector>
+
+#include "usage.hpp"
 
 #pragma comment(lib, "iphlpapi.lib")
 #pragma comment(lib, "ws2_32.lib")
@@ -30,8 +31,6 @@ typedef struct config
 };
 #endif
 
-#define handle_error(msg)\
-	do { perror(msg); exit(EXIT_FAILURE); } while(0);
 
 namespace wps
 { // windows-port-scanner
