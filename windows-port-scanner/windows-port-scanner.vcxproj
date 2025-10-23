@@ -125,6 +125,7 @@
   <ItemGroup>
     <ClCompile Include="icmp.hpp" />
     <ClCompile Include="icmp.cpp" />
+    <ClCompile Include="init.cpp" />
     <ClCompile Include="run.cpp" />
     <ClCompile Include="scanner.cpp" />
   </ItemGroup>

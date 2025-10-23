@@ -71,13 +71,12 @@ void wps::scanner::listeningports()
     }
 }
 
+/*
 void wps::scanner::run() {
-    if (WSAStartup(MAKEWORD(2, 2), &wsadata) != 0) {
-        handle_error("WSAStartup failed: ", WSAGetLastError());
-        exit(EXIT_FAILURE);
-    }
+
+
 
     //ports();
     listeningports();
     WSACleanup();
-}
+}*/
