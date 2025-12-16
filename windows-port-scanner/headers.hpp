@@ -11,7 +11,7 @@
 #include <iostream>
 #include <vector>
 
-#include "usage.hpp"
+//#include "usage.hpp"
 
 #pragma comment(lib, "iphlpapi.lib")
 #pragma comment(lib, "ws2_32.lib")
@@ -19,7 +19,7 @@
 #define handle_error(msg) \
         do { perror(msg); exit(EXIT_FAILURE); } while(0)
 
-
+/*
 void
 usage(char* path)
 {
@@ -31,6 +31,7 @@ usage(char* path)
 	printf("In order to improve the speed, lower the delay (-d) between requests or\n");
 	printf("increase the size (-s) of the data buffer\n");
 }
+*/
 
 #ifndef VAR_STRUCTS_HPP
 #define VAR_STRUCTS_HPP

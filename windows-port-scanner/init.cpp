@@ -1,9 +1,9 @@
+
 #include "headers.hpp"
 
 bool
 wps::scanner::init()
 {
-
     try {
 
         if (WSAStartup(MAKEWORD(2, 2), &wsadata) != 0) {

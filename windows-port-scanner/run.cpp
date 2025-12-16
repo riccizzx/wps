@@ -1,27 +1,34 @@
+
 #include "headers.hpp"
+#include "usage.hpp"
 
 int
-main(int argc, char **argv) {
+main() {
 
-	int opt;
 	wps::scanner scan;
 
-	scan.init();
+	try {
+		scan.init();
 
-	//menu(*argv);
-
-	// parse command line options
-	for (opt = 1; opt < argc; opt++) {
-		if (argv[opt][0] == '-') {
-			switch (argv[opt][1]) {
-			case 'l':
-				usage(*argv);
-				return 0;
-			}
-		}
+	
+	}
+	catch (const std::exception& e) {
+		handle_error("error in main ", e.what());
+		return EXIT_FAILURE;
+	
 	}
 
+	usage("windows-port-scanner");
 
+	char choice;
+	std::cin >> choice;
+
+	switch (choice) {
+	
+	case 'l':
+		scan.listeningports();
+		
+	}
 
 	return 0;
 }
