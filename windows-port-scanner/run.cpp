@@ -21,14 +21,18 @@ main() {
 	usage("windows-port-scanner");
 
 	char choice;
-	std::cin >> choice;
 
-	switch (choice) {
-	
-	case 'l':
-		scan.listeningports();
-		
-	}
+	do {
+
+		std::cin >> choice;
+
+		switch (choice) {
+
+		case 'l':
+			scan.listeningports();
+
+		}
+	}while (choice != 'q');
 
 	return 0;
 }

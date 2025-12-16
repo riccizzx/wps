@@ -13,6 +13,7 @@ void usage(const char* path)
 	std::cout << "  -r                send a single test icmp request and then quit\n";
 	std::cout << "In order to improve the speed, lower the delay (-d) between requests or\n";
 	std::cout << "increase the size (-s) of the data buffer\n";
+	std::cout << "  -q to quit wps\n";
 
 }
 
