@@ -4,15 +4,22 @@
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 
 #include "headers.hpp"
-#pragma comment(lib, "icmpapi.lib")
 
-namespace imcp {
+namespace icmp {
 
 	class icmp_ping {
 
+	public:
+
+		
+
+	private:
+
+		void specify_id(std::string ip, const int port);
+		SOCKET raw_socket;
 
 
-	}
+	};
 
 }
 
