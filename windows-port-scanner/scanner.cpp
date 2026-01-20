@@ -71,12 +71,3 @@ void wps::scanner::listeningports()
     }
 }
 
-/*
-void wps::scanner::run() {
-
-
-
-    //ports();
-    listeningports();
-    WSACleanup();
-}*/

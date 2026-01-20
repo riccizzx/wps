@@ -8,6 +8,9 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <iphlpapi.h>
+#include <IcmpAPI.h>
+
+#include <stdio.h>
 #include <iostream>
 #include <vector>
 
@@ -36,7 +39,7 @@ struct config
 
 
 namespace wps
-{ // windows-port-scanner
+{ 
 
 	class scanner
 	{
@@ -46,7 +49,6 @@ namespace wps
 		bool init();
 		void ports(); // for table all ports in id host
 		void listeningports();
-		void run();
 	
 	private:
 
