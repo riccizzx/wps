@@ -6,41 +6,48 @@
 int
 main() {
 
-	wps::scanner scan;
-	icmp::icmp_ping ping;
+    wps::scanner scan;
 
-	try {
-		scan.init();
+    scan.init();
 
-	
-	}
-	catch (const std::exception& e) {
-		handle_error("error in main ", e.what());
-		return EXIT_FAILURE;
-	
-	}
+    char choice;
 
-	usage("windows-port-scanner");
+	printf("\n *** Windows Port Scanner (wps) *** \n");
 
-	char choice;
+    printf ("\n" "windows port scanner is a program to facilitate your view of network in your computer\n");
+	printf("type" " 'h' " "to see the help menu with the features.\n");
 
-	do {
+    while (true) {
 
-		std::cin >> choice;
+        std::cin >> choice;
 
-		switch (choice) {
+        switch (choice) {
 
-		case 'l':
-			scan.listeningports();
+        case 'l':
+            scan.listeningports();
+            break;
 
-		case 'h':
-			printf("inform destination ip and port to send a icmp/echo-rqst\n");
-			//ping.specify_id(std::string ip, const int port);
+        case 'p':
+            printf("inform destination ip and port to send an icmp echo request\n");
+            // ping.specify_id(ip, port);
+            break;
 
-		}
+        case 'h':
+            usage();
+            break;
 
+        case 'q':
+        case 'Q':
+            return 0;
 
-	}while (choice != 'q');
+        default:
+            printf("unknown option\n");
+            break;
 
-	return 0;
+        }
+    
+    }
+
+    return 0;
+
 }
