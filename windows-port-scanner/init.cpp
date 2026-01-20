@@ -6,16 +6,17 @@ wps::scanner::init()
 {
     try {
 
-        if (WSAStartup(MAKEWORD(2, 2), &wsadata) != 0) {
-            handle_error("failed!");
-            return FALSE;
-        }
-
+        WSAStartup(MAKEWORD(2, 2), &wsadata);
     }
+    
     catch (const std::exception& e)
+    
     {
+
         handle_error("error in initialize socket API ", e.what());
+		printf("%s", "run with administrator privileges\n");
         return FALSE;
+    
     }
 
     return TRUE;
