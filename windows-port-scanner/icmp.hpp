@@ -1,26 +1,11 @@
 
-#ifdef _WIN32
-#define ICMP_HPP
-#define _WINSOCK_DEPRECATED_NO_WARNINGS
+#ifdef		_WIN32
+#define		ICMP_HPP
 
 #include "headers.hpp"
 
-namespace icmp {
+int ping(const char* host, int cnt = 4);
 
-	class icmp_ping {
+#define PING_TIMEOUT 1000 // ms
 
-	public:
-
-		
-
-	private:
-
-		void specify_id(std::string ip, const int port);
-		SOCKET raw_socket;
-
-
-	};
-
-}
-
-#endif
+#endif	   #ICMP_HPP
