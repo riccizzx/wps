@@ -30,6 +30,7 @@ struct config
 {
 
 	PMIB_TCPTABLE_OWNER_PID pTcpTable; // get the id and the ipv4 tcp links
+	PMIB_UDPTABLE_OWNER_PID pUdpTable; // get the id and the ipv4 udp links
 	DWORD dwSize = 0;
 	DWORD dwRetVal = 0;
 
@@ -49,6 +50,7 @@ namespace wps
 		bool init();
 		void ports(); // for table all ports in id host
 		void listeningports();
+		void adapter();
 	
 	private:
 
