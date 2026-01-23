@@ -9,6 +9,7 @@ void wps::scanner::ports()
     // get required buffer size
     if ((c.dwRetVal = GetExtendedTcpTable(c.pTcpTable, &c.dwSize, TRUE, AF_INET,
         TCP_TABLE_OWNER_PID_ALL, 0)) == ERROR_INSUFFICIENT_BUFFER) // get all tcp table 
+    
     {
     
         free(c.pTcpTable); 
@@ -17,6 +18,25 @@ void wps::scanner::ports()
     }
 
 }
+
+/*
+void wps::scanner::adapter()
+{
+    // retrieve adapter info
+    if ((c.dwRetVal = GetUniDirectionalAdapterInfo()) == NO_ERROR) {
+        // Process adapter info here
+        
+
+    }
+
+    else {
+
+        handle_error("GetUniDirectionalAdapterInfo failed with code: ", c.dwRetVal);
+    
+    }
+
+}
+*/
 
 void wps::scanner::listeningports()
 {
@@ -34,6 +54,21 @@ void wps::scanner::listeningports()
         c.pTcpTable = (MIB_TCPTABLE_OWNER_PID*)malloc(c.dwSize);
 
     }
+
+    //if ((c.dwRetVal = GetUniDirectionalAdapterInfo()))
+
+    if (c.pTcpTable == NULL) {
+        handle_error("Memory allocation failed\n");
+        return;
+	}
+
+    /*W
+    if ((c.dwRetVal = GetExtendedUdpTable(c.pUdpTable, &c.dwSize, TRUE, AF_INET,
+        UDP_TABLE_OWNER_PID, 0)) == NO_ERROR) {
+
+        
+
+    }*/
 
     // retrieve TCP table
     if ((c.dwRetVal = GetExtendedTcpTable(c.pTcpTable, &c.dwSize, TRUE, AF_INET,
@@ -71,3 +106,4 @@ void wps::scanner::listeningports()
     }
 }
 
+ 
